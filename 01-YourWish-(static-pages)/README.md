@@ -7,7 +7,6 @@
 
 # Project overview
 
-    ![wish](https://user-images.githubusercontent.com/69418066/105911950-efb3f600-6054-11eb-9ed3-2a0998733e21.gif)
-
+![wish](https://user-images.githubusercontent.com/72667369/105912213-51746000-6055-11eb-8f0c-23a0d03e983a.gif)
     
 

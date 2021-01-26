@@ -1,0 +1,48 @@
+body{
+    background-color: rgb(245, 245, 240);
+}
+
+.wish{
+    background-color: white;
+    margin: auto;
+    min-width: 22.5rem;
+    width: 20rem;
+    height: 20rem;
+    padding: 1rem;
+    box-shadow: 0 0 3px 3px orange;
+    margin-top: 5rem;
+}
+
+h1{
+    color: rgb(243, 118, 118);
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    font-size: 1rem;
+    border: none;
+    border-bottom: .3rem solid rgb(243, 118, 118);
+    margin-bottom: 1rem; 
+}
+
+input:focus{
+    outline: none;
+}
+
+button{
+    font-size: 1rem;
+    padding: .2rem;
+    color: white;
+    background-color: rgb(255, 172, 172);
+    border: 1px solid rgb(243, 118, 118) ;
+}
+
+button:hover{
+    outline: none;
+    background-color:  rgb(243, 118, 118);
+}

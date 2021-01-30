@@ -13,7 +13,7 @@ body{
     margin-top: 5rem;
 }
 
-h1{
+.wish h1{
     color: rgb(243, 118, 118);
     text-align: center;
 }
@@ -46,3 +46,52 @@ button:hover{
     outline: none;
     background-color:  rgb(243, 118, 118);
 }
+
+.car{
+    background-color: white;
+    margin: auto;
+    min-width: 22.5rem;
+    width: 35rem;
+    height: 35rem;
+    padding: 1rem;
+    box-shadow: 0 0 3px 3px rgb(98, 72, 241);
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.bus{
+    background-color: white;
+    margin: auto;
+    min-width: 22.5rem;
+    width: 35rem;
+    height: 35rem;
+    padding: 1rem;
+    box-shadow: 0 0 3px 3px rgb(98, 72, 241);
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+h1{
+    color:rgb(37, 155, 110);
+    text-align: center;
+}
+
+img{
+    margin:auto;
+    width: 95%;
+}
+
+a{
+    font-size: 1.5rem;
+    text-decoration: none;
+    color:rgb(236, 122, 114);
+    text-align: center;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+

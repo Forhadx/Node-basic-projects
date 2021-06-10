@@ -1,0 +1,105 @@
+.App {
+  text-align: center;
+}
+
+.login-page {
+  width: 30rem;
+  padding: 3rem 0;
+  margin: auto;
+  margin-top: 10rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0.5rem 1rem grey;
+  position: relative;
+}
+
+.login-form {
+  margin-bottom: 1rem;
+}
+
+.login-form input {
+  width: 25rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.login-form input:focus {
+  outline: none;
+  background-color: rgb(227, 227, 253);
+}
+
+.login-form button {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  width: 25rem;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  border: none;
+  background-color: rgb(74, 129, 248);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-fail__link a {
+  text-decoration: none;
+  margin-right: 2rem;
+  color: rgb(17, 94, 236);
+  font-size: 1rem;
+}
+
+.error-message{
+  font-size: .8rem;
+  color: red;
+  position: absolute;
+  top: 1rem;
+  left: 40%;
+}
+
+.send-message{
+  font-size: 1rem;
+  color: green;
+  position: absolute;
+  top: 1rem;
+  left: 40%;
+}
+
+.home-page{
+  margin: auto;
+  margin-top: 10rem;
+  padding: 3rem;
+  width: 40rem;
+  text-align: center;
+  box-shadow: 0 0.5rem 1rem grey;
+}
+
+.home-page h1{
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.home-page h2{
+  text-transform: uppercase;
+}
+
+.home-page span{
+  color: green;
+  font-size: 3rem;
+  text-transform: none;
+}
+
+.logout-btn{
+  padding: .5rem 1.5rem;
+  font-size: 1.5rem;
+  background-color: rgb(255, 72, 0);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

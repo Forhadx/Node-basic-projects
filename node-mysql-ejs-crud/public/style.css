@@ -1,0 +1,54 @@
+main {
+  padding-top: 3rem;
+  margin: auto;
+  max-width: 40rem;
+}
+
+.person-form {
+  margin: auto;
+  margin-bottom: 2rem;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.person-form input {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid purple;
+  margin-bottom: 1rem;
+}
+
+.person-form button {
+  margin-top: 1rem;
+  width: 5rem;
+  border: none;
+  background-color: purple;
+  color: white;
+  padding: 0.3rem 0;
+  border-radius: 0.1rem;
+  cursor: pointer;
+}
+
+.person-list {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.person-list th,
+.person-list td {
+  text-align: left;
+  padding: 8px;
+}
+
+.person-list tr:nth-child(even) {
+  background-color: #d6eeee;
+}
+
+.person-list .btn {
+  border: none;
+  background-color: green;
+  color: white;
+  padding: 0.2rem 0.3rem;
+  cursor: pointer;
+}

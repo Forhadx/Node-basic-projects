@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <form action="/person" class="person-form" method="POST">
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="enter your name"
+        />
+        <input type="number" name="age" id="age" placeholder="enter your age" />
+        <input
+          type="text"
+          name="work"
+          id="work"
+          placeholder="enter your work"
+        />
+        <button type="submit">submit</button>
+      </form>
+
+      <table class="person-list">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Work</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%for(let person of personList){%>
+          <tr>
+            <td><%= person.id %></td>
+            <td><%= person.name %></td>
+            <td><%= person.age %></td>
+            <td><%= person.work %></td>
+            <td>
+              <a class="btn" href="/person/edit/<%= person.id %>">edit</a>
+            </td>
+            <td>
+              <form action="/delete-person" method="POST">
+                <input type="hidden" value="<%= person.id %>" name="personId" />
+                <button class="btn" type="submit">delete</button>
+              </form>
+            </td>
+          </tr>
+          <%}%>
+        </tbody>
+      </table>
+    </main>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

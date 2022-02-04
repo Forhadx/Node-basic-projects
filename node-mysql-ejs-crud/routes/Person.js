@@ -10,8 +10,8 @@ router.post("/person", personController.addPerson);
 
 router.post("/delete-person", personController.deletePerson);
 
-router.get("/person/edit/:pId", personController.getEditPerson);
+router.get("/edit-person/:pId", personController.getEditPerson);
 
-router.post("/person/edit", personController.addEditPerson);
+router.post("/edit-person/", personController.addEditPerson);
 
 module.exports = router;

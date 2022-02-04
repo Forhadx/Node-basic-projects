@@ -6,6 +6,7 @@ main {
 
 .person-form {
   margin: auto;
+  margin-top: 2rem;
   margin-bottom: 2rem;
   max-width: 80%;
   display: flex;
@@ -51,4 +52,15 @@ main {
   color: white;
   padding: 0.2rem 0.3rem;
   cursor: pointer;
+}
+
+.refresh {
+  padding: 0.3rem 0.5rem;
+  background-color: white;
+  border: none;
+  border: 1px solid green;
+  color: green;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 2rem 0;
 }

@@ -4,8 +4,7 @@ exports.getPersons = async (req, res, next) => {
   try {
     let persons = await Person.findAll();
     res.render("index", {
-      pageTitle: "All Person",
-      path: "/person",
+      isEdit: false,
       personList: persons,
     });
   } catch (err) {
@@ -41,11 +40,30 @@ exports.deletePerson = async (req, res, next) => {
 };
 
 exports.getEditPerson = async (req, res, next) => {
-  // console.log("up get", req.params.pId);
-  // res.render('index',{
-  // })
+  let query = req.query.edit;
+  let id = req.params.pId;
+  let persons = await Person.findAll();
+  let person = await Person.findByPk(id);
+  res.render("index", {
+    personList: persons,
+    isEdit: query,
+    personDetails: person,
+  });
 };
 
 exports.addEditPerson = async (req, res, next) => {
-  console.log("up");
+  const pId = req.body.pId;
+  const name = req.body.name;
+  const age = req.body.age;
+  const work = req.body.work;
+  try {
+    let person = await Person.findByPk(pId);
+    person.name = name;
+    person.age = age;
+    person.work = work;
+    await person.save();
+    res.redirect("/person");
+  } catch (err) {
+    console.log(err);
+  }
 };

@@ -3,9 +3,15 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
-
 const User = require("../models/auth");
 
+const sgMail = require("@sendgrid/mail");
+
+sgMail.setApiKey(
+  "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"
+);
+
+// MAILTRAP
 var transport = nodemailer.createTransport({
   host: "smtp.mailtrap.io",
   port: 2525,
@@ -27,6 +33,7 @@ exports.signup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   const name = req.body.name;
+  console.log("email: ", email);
 
   bcrypt
     .hash(password, 12)
@@ -111,7 +118,7 @@ exports.reset = (req, res, next) => {
   }
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
-      console.log(err);
+      console.log("reset error: ", err);
     }
     const token = buffer.toString("hex");
     User.findOne({ email: req.body.email })
@@ -126,18 +133,41 @@ exports.reset = (req, res, next) => {
         return user.save();
       })
       .then((result) => {
-        console.log("token: ", token);
-        transport.sendMail({
-          to: req.body.email,
-          from: "forhadsh1@gmail.com",
-          subject: "Password Reset",
-          html: `
-              <p>You requested a password reset</p>
-              <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password.</p>
-            `,
-          text: "hey bro, ???",
-        });
-        res.status(200).json({message:'send token to your email'});
+        console.log("reset token: ", token);
+
+        // MAILTRAP
+        // transport.sendMail({
+        //   to: req.body.email,
+        //   from: "forhadsh1@gmail.com",
+        //   subject: "Password Reset",
+        //   html: `
+        //       <p>You requested a password reset</p>
+        //       <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password.</p>
+        //     `,
+        //   text: "hey bro, ???",
+        // });
+
+        // SENDGRID
+        sgMail
+          .send({
+            to: req.body.email,
+            from: "shakinata7@gmail.com", // Use the email address or domain you verified above
+            subject: "Sending with Twilio SendGrid is Fun",
+            text: "and easy to do anywhere, even with Node.js",
+            html: `
+                 <p>You requested a password reset</p>
+                 <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password.</p>
+               `,
+          })
+          .then(
+            () => {
+              console.log("success?? ");
+              res.status(200).json({ message: "send token to your email" });
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
       })
       .catch((err) => {
         if (!err.statusCode) {

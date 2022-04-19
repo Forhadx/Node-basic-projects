@@ -1,0 +1,17 @@
+{
+  "name": "google-sheet-with-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "googleapis": "^100.0.0",
+    "nodemon": "^2.0.15"
+  }
+}

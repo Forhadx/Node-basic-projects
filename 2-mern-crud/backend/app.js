@@ -21,7 +21,7 @@ app.use('/', crudRoutes)
 
 mongoose
 .connect(
-    "mongodb+srv://forhad12:forhad123456@cluster0.sonyg.mongodb.net/School?authSource=admin&replicaSet=atlas-12s196-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"
+    ""
   )
 .then(result =>{
     app.listen(8080);

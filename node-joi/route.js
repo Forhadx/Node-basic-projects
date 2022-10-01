@@ -9,7 +9,7 @@ const validate = require("./validate");
 
 const router = express.Router();
 
-router.route("/a").post([celebrate(userValidation.signValidation)], userController.signup);
+router.route("/a/:id").post([celebrate(userValidation.advance)], userController.signup);
 
 router.post("/b", validate(userValidation.signValidation), userController.signup);
 

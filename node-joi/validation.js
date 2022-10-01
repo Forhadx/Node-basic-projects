@@ -1,13 +1,8 @@
 const Joi = require("joi");
 
-// const signValidation = Joi.object({
-//   name: Joi.string(),
-//   age: Joi.number(),
-// });
-
 const signValidation = {
   body: Joi.object().keys({
-    name: Joi.string().required(),
+    name: Joi.string().min(3).max(10).required(),
     age: Joi.number().required(),
   }),
 };

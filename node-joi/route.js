@@ -14,3 +14,9 @@ router.route("/a/:id").post([celebrate(userValidation.advance)], userController.
 router.post("/b", validate(userValidation.signValidation), userController.signup);
 
 module.exports = router;
+
+
+/*
+    http://localhost:5000/a/3?page=3
+
+*/

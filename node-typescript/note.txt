@@ -1,0 +1,42 @@
+# global install
+    npm intall -g typescript
+
+## duiring project
+    npm install ts-node typescript @types/express --save-dev
+
+# package.json
+
+        "main": "index.js",
+        "scripts": {
+            "dev": "nodemon ./src/server.ts",
+            "start": "node ./build/server.js"
+        },
+
+# tsconfig.json
+    $ tsc --init
+    
+    {
+        "compilerOptions": {
+            "target": "es2016" ,
+            "module": "commonjs" ,
+            "rootDir": "./src" ,
+            "moduleResolution": "node" ,
+            "outDir": "./build" ,
+            "esModuleInterop": true,
+            "forceConsistentCasingInFileNames": true ,
+            "strict": true ,
+            "skipLibCheck": true
+        },
+        "include": ["./src"]
+    }
+
+
+
+# run 
+    npx tsc
+    npm run dev
+
+
+# cors |- install both
+    npm install cors
+    npm install --save-dev @types/cors

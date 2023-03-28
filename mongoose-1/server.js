@@ -5,13 +5,13 @@ const User = require("./User");
 mongoose.connect(process.env.URI);
 
 async function add() {
-  const user = await User.create({ name: "forhad", age: 40 });
+  const user = await User.create({ name: "forhadxx", age: 40 });
   await user.save();
 
   console.log(user);
 }
 
-// add();
+add();
 
 async function fetch() {
   // const users = await User.find(); // fetch all users
@@ -30,7 +30,7 @@ async function fetch() {
 
   console.log("users: ", users);
 }
-fetch();
+// fetch();
 
 /*  Read modifire
   sort -> User.find().sort({name: -1}) // -1 dsce order, 1 asc order

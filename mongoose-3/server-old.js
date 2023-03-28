@@ -2,46 +2,20 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const User = require("./User");
 const Blog = require("./blog");
+const { findOneAndDelete } = require("./User");
 
-mongoose.connect(
-  process.env.URI,
-  {
-    poolSize: 2,
-    connectTimeoutMS: 30000,
-    socketTimeoutMS: 60000,
-    tlsInsecure: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  },
-  () => {
-    console.log("mongdb is connected");
-  }
-);
-// mongoose.set("strictQuery", false);
+mongoose.connect(process.env.URI);
 
 //###
 async function addUser() {
-  console.log("user...");
-  // const user = await User.create([
-  //   { name: "a" },
-  //   { name: "b" },
-  //   { name: "c" },
-  //   { name: "d" },
-  //   { name: "e" },
-  // ]);
   const user = await User.create({ name: "a" });
-  // const user = await User.find()
-  console.log('user: ',user);
+  console.log(user);
 }
-addUser();
+// addUser();
 
 //###
 async function addBlog() {
-  const blog = await Blog.create({
-    user: "634d9a95244654b568e95ba1",
-    title: "aaaa",
-  });
+  const blog = await Blog.create({ user: "634d9a95244654b568e95ba1", title: "aaaa" });
   console.log(blog);
 }
 // addBlog();
@@ -78,4 +52,4 @@ async function deleteUserWithBlog() {
     console.log("error: ", err);
   }
 }
-// deleteUserWithBlog();
+deleteUserWithBlog();

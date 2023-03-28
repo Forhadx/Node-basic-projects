@@ -1,6 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const User = require("./User");
+const Order = require('./order')
 
 mongoose.connect(process.env.URI);
 
@@ -43,4 +44,17 @@ async function fetchByName() {
   console.log("Users: ", users);
 }
 
-fetchByName();
+// fetchByName();
+
+
+async function addPrice() {
+  let obj = {
+    totalPrice: 550,
+    deliveryCharge: 90,
+    commission: 8,
+  };
+  const order = await Order.create({ totalPrice: 12 });
+  // let order = await Order.find()
+  console.log(order);
+}
+// addPrice();

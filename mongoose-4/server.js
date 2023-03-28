@@ -4,6 +4,7 @@ const OrderModel = require("./Order");
 
 mongoose.connect(process.env.URI);
 
+
 //###
 async function addOrder() {
   let obj = {
@@ -12,6 +13,7 @@ async function addOrder() {
     deliveryCharge: 100,
   };
   const orderData = await OrderModel.create(obj);
+  // const orderData = await OrderModel.find();
 
   // const orderData = await OrderModel.findOneAndUpdate(
   //   { _id: "6367a3313c7467a335a4d6b7" },
@@ -22,8 +24,9 @@ async function addOrder() {
   // const orderData = await OrderModel.findOne({ _id: "636756654677d6ac12f95d53" });
   // orderData.commission = 8;
 
-  await orderData.save();
+  // await orderData.save();
 
   console.log(orderData);
 }
-addOrder();
+// addOrder();
+// 

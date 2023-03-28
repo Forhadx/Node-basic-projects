@@ -9,24 +9,33 @@ const app = express();
 
 app.use("/do", async (req, res) => {
   const session = await mongoose.startSession();
+  // Start a transaction within the session
+  session.startTransaction();
 
   try {
-    // Start a transaction within the session
-    session.startTransaction();
-
-    const userData = await UserModel.create({ name: "xyz" }, { session });
+    const userData = await UserModel.create([{ name: "xyz" }], { session });
     const blogData = await BlogModel.create(
-      {
-        user: "64232819f17a9b64003920f6_asdf",
-        title: "abc",
-      },
+      [
+        {
+          // user: "64232819f17a9b64003920f6_asdf",
+          user: userData[0]?._id,
+          title: "abc",
+        },
+      ],
       { session }
     );
 
+    const data = await BlogModel.findOneAndUpdate(
+      //   { _id: blogData },
+      { _id: "64232819f17a9b64003920f6_asdf" },
+      { $set: { title: "abc" } },
+      { new: true, session }
+    );
+
+    res.json({ msg: "yes", data, data2: blogData });
+
     // Commit the transaction
     await session.commitTransaction();
-
-    res.json({ msg: "yes", data: blogData });
   } catch (err) {
     // End the session
     session.endSession();

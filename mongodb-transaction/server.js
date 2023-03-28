@@ -32,10 +32,10 @@ app.use("/do", async (req, res) => {
       { new: true, session }
     );
 
-    res.json({ msg: "yes", data, data2: blogData });
-
     // Commit the transaction
     await session.commitTransaction();
+
+    res.json({ msg: "yes", data, data2: blogData });
   } catch (err) {
     // End the session
     session.endSession();

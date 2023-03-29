@@ -7,6 +7,16 @@ const BlogModel = require("./blog");
 
 const app = express();
 
+const updateFunction = async (blogData, session) => {
+  const data = await BlogModel.findOneAndUpdate(
+    // { _id: blogData[0]?._id },
+    { _id: "64232819f17a9b64003920f6_asdf" }, // create error
+    { $set: { title: "abc" } },
+    { new: true, session }
+  );
+  return data;
+};
+
 app.use("/do", async (req, res) => {
   const session = await mongoose.startSession();
   // Start a transaction within the session
@@ -25,12 +35,7 @@ app.use("/do", async (req, res) => {
       { session }
     );
 
-    const data = await BlogModel.findOneAndUpdate(
-      //   { _id: blogData },
-      { _id: "64232819f17a9b64003920f6_asdf" },
-      { $set: { title: "abc" } },
-      { new: true, session }
-    );
+    const data = await updateFunction(blogData, session);
 
     // Commit the transaction
     await session.commitTransaction();
@@ -46,7 +51,6 @@ app.use("/do", async (req, res) => {
 
 app.use("/", async (req, res) => {
   const user = await UserModel.find({});
-
   res.json({ data: user, msg: "yes" });
 });
 

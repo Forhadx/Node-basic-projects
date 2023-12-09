@@ -2,24 +2,30 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const User = require("./User");
 const express = require("express");
-const redis = require("redis");
-const client = redis.createClient();
-// const client = redis.createClient("redis://127.0.0.1:6379");
-client.connect();
+const { redisClient } = require("./service/redis");
+const { homeCache, removeHomeCache } = require("./service/redisMiddleware");
+// const redis = require("redis");
+// const redisClient = redis.createClient("redis://127.0.0.1:6379");
+// redisClient.connect();
 
 const app = express();
 app.use(express.json());
 
+// GET METHOD
+app.get("/", (req, res) => {
+  res.status(200).json({
+    Message: "Welcome",
+  });
+});
+
 // POST METHOD
-app.post("/user", async (req, res) => {
+app.post("/user", removeHomeCache, async (req, res) => {
   try {
-    // const key = req.params.key;
-    // const value = req.params.value;
-    // await client.set(key, value);
+    console.log("enter..");
+
     let userData = await User.create({
-      name: "forhad",
-      age: 23,
-      age: 23,
+      name: "rakib",
+      age: 22,
     });
 
     res.status(201).json({
@@ -35,21 +41,14 @@ app.post("/user", async (req, res) => {
 });
 
 // GET METHOD
-app.get("/users", async (req, res) => {
+app.get("/users", homeCache, async (req, res) => {
   try {
-    // const key = req.params.key;
+    let userData = await User.find().limit(20);
 
-    const value = await client.get("all");
-
-    if (value) {
-      return res
-        .status(404)
-        .json({ data: JSON.parse(value), message: "got it" });
-    }
-
-    let userData = await User.find();
-
-    await client.set("all", JSON.stringify(userData));
+    await redisClient.set("all", JSON.stringify(userData), {
+      EX: 10, // 10, 200 seconds
+      NX: true, //  when set to true, it ensures that the set() method should only set a key that doesn’t already exist in Redis.
+    });
 
     res.status(200).json({
       data: userData,
@@ -63,21 +62,12 @@ app.get("/users", async (req, res) => {
 });
 
 // GET METHOD
-app.get("/user/:id", async (req, res) => {
+app.get("/remove", async (req, res) => {
   try {
-    // const key = req.params.key;
-    // const value = await client.get(key);
-
-    // if (!value) {
-    //   return res
-    //     .status(404)
-    //     .json({ message: `Couldn't find key: '${key}' value!` });
-    // }
+    await redisClient.del("all");
 
     res.status(200).json({
-      Message: "Fetch key value form redis server successfully.",
-      key: key,
-      value: value,
+      Message: "remove data..",
     });
   } catch (err) {
     res
@@ -89,7 +79,7 @@ app.get("/user/:id", async (req, res) => {
 mongoose.connect(process.env.URI, () => {
   console.log("database connection established");
   // START THE SERVER
-  app.listen(5000, () => {
-    console.log("SERVER RUN AT 5000");
+  app.listen(6000, () => {
+    console.log("SERVER RUN AT 6000");
   });
 });

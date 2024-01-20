@@ -1,0 +1,28 @@
+
+## install 
+    $ npm i webpack-node-externals
+    $ npm i webpack-cli
+
+## config package.json
+       "scripts": {
+            "start": "nodemon app.js",
+            "build": "  webpack --mode development",
+            "start:prod": "node dist/server.js"
+        },
+
+
+    // make dist folder
+
+
+# create webpack.config.js file paste the codes
+
+
+## cmd
+    - run the project
+            $ npm start
+    
+    - build the project
+        $ npm run build
+    
+    - run the production project
+        $ npm run start:prod

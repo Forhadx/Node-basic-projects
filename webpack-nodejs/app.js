@@ -1,20 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const User = require("./User");
+const routes = require("./routes");
 
 const app = express();
 app.use(express.json());
 
-app.get("/users", async (req, res) => {
-  const data = await User.find();
-  return res.json({
-    msg: "all users",
-    data,
-  });
-});
+app.use("/", routes);
 
-app.listen(5000, () => {
+app.listen(5000, ()=> {
   console.log("server listening on port 5000");
 
   mongoose.connect(

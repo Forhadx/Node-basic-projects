@@ -9,23 +9,43 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./User.js":
-/*!*****************!*\
-  !*** ./User.js ***!
-  \*****************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-eval("const mongoose = __webpack_require__(/*! mongoose */ \"mongoose\");\r\n\r\nconst User = new mongoose.Schema({\r\n  name: String,\r\n  age: Number,\r\n});\r\n\r\nmodule.exports = mongoose.model(\"User\", User);\r\n\n\n//# sourceURL=webpack://mongoose_kayle/./User.js?");
-
-/***/ }),
-
 /***/ "./app.js":
 /*!****************!*\
   !*** ./app.js ***!
   \****************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("(__webpack_require__(/*! dotenv */ \"dotenv\").config)();\r\nconst express = __webpack_require__(/*! express */ \"express\");\r\nconst mongoose = __webpack_require__(/*! mongoose */ \"mongoose\");\r\nconst User = __webpack_require__(/*! ./User */ \"./User.js\");\r\n\r\nconst app = express();\r\napp.use(express.json());\r\n\r\napp.get(\"/users\", async (req, res) => {\r\n  const data = await User.find();\r\n  return res.json({\r\n    msg: \"all users\",\r\n    data,\r\n  });\r\n});\r\n\r\napp.listen(5000, () => {\r\n  console.log(\"server listening on port 5000\");\r\n\r\n  mongoose.connect(process.env.URI, () => {\r\n    console.log(\"db connection established\");\r\n  });\r\n});\r\n\n\n//# sourceURL=webpack://mongoose_kayle/./app.js?");
+eval("(__webpack_require__(/*! dotenv */ \"dotenv\").config)();\r\nconst express = __webpack_require__(/*! express */ \"express\");\r\nconst mongoose = __webpack_require__(/*! mongoose */ \"mongoose\");\r\nconst routes = __webpack_require__(/*! ./routes */ \"./routes/index.js\");\r\n\r\nconst app = express();\r\napp.use(express.json());\r\n\r\napp.use(\"/\", routes);\r\n\r\napp.listen(5000, ()=> {\r\n  console.log(\"server listening on port 5000\");\r\n\r\n  mongoose.connect(\r\n    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.sonyg.mongodb.net/mongo_practice`,\r\n    () => {\r\n      console.log(\"db connection established\");\r\n    }\r\n  );\r\n});\r\n\n\n//# sourceURL=webpack://mongoose_kayle/./app.js?");
+
+/***/ }),
+
+/***/ "./controllers/index.js":
+/*!******************************!*\
+  !*** ./controllers/index.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("const UserModel = __webpack_require__(/*! ../models/User */ \"./models/User.js\");\r\n\r\nexports.getUsers = async (req, res, next) => {\r\n  try {\r\n    const data = await UserModel.find();\r\n    return res.json({\r\n      msg: \"all users\",\r\n      data,\r\n    });\r\n  } catch (err) {\r\n    console.log(\"fetch error: \", err);\r\n  }\r\n};\r\n\n\n//# sourceURL=webpack://mongoose_kayle/./controllers/index.js?");
+
+/***/ }),
+
+/***/ "./models/User.js":
+/*!************************!*\
+  !*** ./models/User.js ***!
+  \************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const mongoose = __webpack_require__(/*! mongoose */ \"mongoose\");\r\n\r\nconst User = new mongoose.Schema({\r\n  name: String,\r\n  age: Number,\r\n});\r\n\r\nmodule.exports = mongoose.model(\"User\", User);\r\n\n\n//# sourceURL=webpack://mongoose_kayle/./models/User.js?");
+
+/***/ }),
+
+/***/ "./routes/index.js":
+/*!*************************!*\
+  !*** ./routes/index.js ***!
+  \*************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const express = __webpack_require__(/*! express */ \"express\");\r\n\r\nconst controller = __webpack_require__(/*! ../controllers */ \"./controllers/index.js\");\r\n\r\nconst router = express.Router();\r\n\r\nrouter.get('/users', controller.getUsers);\r\n\r\nmodule.exports = router; \n\n//# sourceURL=webpack://mongoose_kayle/./routes/index.js?");
 
 /***/ }),
 
